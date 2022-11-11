@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "outDir": "dist",
+    "strict": true,
+    "lib": ["esnext"],
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@root/*": ["./*"],
+      "@client/*": ["./src/client/*"],
+      "@components/*": ["./src/client/components/*"],
+      "@styles/*": ["./src/client/styles/*"],
+      "@server/*": ["./src/server/*"],
+      "@shared/*": ["./src/shared/*"]
+    }
+  }
+}

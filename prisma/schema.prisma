@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ToDo {
+  id String @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  title String @default("")
+  content String @default("")
+  importance Importance @default(LOW)
+  isDone Boolean @default(false)
+  checkLists CheckList[]
+}
+
+model CheckList {
+  id String @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  content String
+  isCompleted Boolean @default(false)
+  toDo ToDo @relation(fields: [toDoId], references: [id])
+  toDoId String
+}
+
+enum Importance {
+  LOW
+  MEDIUM
+  HIGH
+}

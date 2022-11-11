@@ -1,0 +1,5 @@
+export const PATHNAME = {
+  GRAPHQL: process.env.NEXT_PUBLIC_API_PATHNAME,
+  GRAPHQL_FULL_PATH:
+    process.env.NEXT_PUBLIC_BASE_URL + process.env.NEXT_PUBLIC_API_PATHNAME,
+};
