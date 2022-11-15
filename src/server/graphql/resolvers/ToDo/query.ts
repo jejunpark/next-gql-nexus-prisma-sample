@@ -19,12 +19,15 @@ export const ToDoQuery = extendType({
     t.field("ToDoItemQuery", {
       type: "ToDo",
       args: {
-        id: nonNull(stringArg()),
+        id: nonNull(intArg()),
       },
       resolve: async (_, { id }, ctx) => {
         return prisma.toDo.findUnique({
           where: {
             id: id,
+          },
+          include: {
+            checkLists: true,
           },
         });
       },
@@ -44,9 +47,32 @@ export const ToDoQuery = extendType({
             isDone: isDone ?? undefined,
             importance: importance ?? undefined,
           },
+          orderBy: {
+            createdAt: "desc",
+          },
+          include: {
+            checkLists: {
+              orderBy: {
+                id: "asc",
+              },
+            },
+          },
           skip: skip ?? 0,
           take: take ?? 10,
         });
+      },
+    });
+
+    t.field("ToDoItemsCountQuery", {
+      type: "ToDoCount",
+      resolve: async (_, {}, ctx) => {
+        const total = await prisma.toDo.count();
+        const done = await prisma.toDo.count({
+          where: {
+            isDone: true,
+          },
+        });
+        return { total, done };
       },
     });
   },

@@ -20,14 +20,12 @@ export const ToDoMutation = extendType({
       type: "ToDo",
       args: {
         title: nonNull(stringArg()),
-        content: nonNull(stringArg()),
         importance: arg({ type: "Importance" }),
       },
-      resolve: (_, { title, content, importance }, ctx) => {
+      resolve: async (_, { title, importance }, ctx) => {
         return prisma.toDo.create({
           data: {
             title: title,
-            content: content,
             importance: importance,
           },
         });
@@ -37,22 +35,34 @@ export const ToDoMutation = extendType({
     t.field("ToDoUpdate", {
       type: "ToDo",
       args: {
-        id: nonNull(stringArg()),
+        id: nonNull(intArg()),
         title: nullable(stringArg()),
-        content: nullable(stringArg()),
         isDone: nullable(booleanArg()),
         importance: arg({ type: "Importance" }),
       },
-      resolve: (_, { id, title, content, isDone, importance }, ctx) => {
+      resolve: async (_, { id, title, isDone, importance }, ctx) => {
         return prisma.toDo.update({
           where: {
             id: id,
           },
           data: {
             title: title,
-            content: content,
             isDone: isDone,
             importance: importance,
+          },
+        });
+      },
+    });
+
+    t.field("ToDoDelete", {
+      type: "ToDo",
+      args: {
+        id: nonNull(intArg()),
+      },
+      resolve: async (_, { id }, ctx) => {
+        return prisma.toDo.delete({
+          where: {
+            id: id,
           },
         });
       },

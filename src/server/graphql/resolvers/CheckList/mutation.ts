@@ -19,18 +19,21 @@ export const CheckListMutation = extendType({
     t.field("CheckListCreate", {
       type: "CheckList",
       args: {
-        content: nonNull(stringArg()),
-        toDoId: nonNull(stringArg()),
+        title: nonNull(stringArg()),
+        toDoId: nonNull(intArg()),
       },
-      resolve: (_, { content, toDoId }, ctx) => {
+      resolve: (_, { title, toDoId }, ctx) => {
         return prisma.checkList.create({
           data: {
-            content: content,
+            title: title,
             toDo: {
               connect: {
                 id: toDoId,
               },
             },
+          },
+          include: {
+            toDo: true,
           },
         });
       },
@@ -39,18 +42,35 @@ export const CheckListMutation = extendType({
     t.field("CheckListUpdate", {
       type: "CheckList",
       args: {
-        id: nonNull(stringArg()),
-        content: nullable(stringArg()),
+        id: nonNull(intArg()),
+        title: nullable(stringArg()),
         isCompleted: nullable(booleanArg()),
       },
-      resolve: (_, { id, content, isCompleted }, ctx) => {
+      resolve: (_, { id, title, isCompleted }, ctx) => {
         return prisma.checkList.update({
           where: {
             id: id,
           },
           data: {
-            content: content ?? undefined,
+            title: title ?? undefined,
             isCompleted: isCompleted ?? undefined,
+          },
+          include: {
+            toDo: true,
+          },
+        });
+      },
+    });
+
+    t.field("CheckListDelete", {
+      type: "CheckList",
+      args: {
+        id: nonNull(intArg()),
+      },
+      resolve: (_, { id }, ctx) => {
+        return prisma.checkList.delete({
+          where: {
+            id: id,
           },
         });
       },
