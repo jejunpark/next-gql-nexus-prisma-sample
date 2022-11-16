@@ -8,6 +8,7 @@ import {
   TO_DO_CREATE,
   TO_DO_ITEMS_COUNT_QUERY,
   TO_DO_UPDATE,
+  TO_DO_DELETE,
 } from "./tags";
 
 export const toDoItemsQuery = async (
@@ -38,4 +39,12 @@ export const toDoUpdateMutation = async (
   ToDoUpdate: NexusGenObjects["ToDo"];
 }> => {
   return await graphQLClient.request(TO_DO_UPDATE, variables);
+};
+
+export const toDoDeleteMutation = async (
+  variables: NexusGenArgTypes["Mutation"]["ToDoDelete"]
+): Promise<{
+  ToDoDelete: NexusGenObjects["ToDo"];
+}> => {
+  return await graphQLClient.request(TO_DO_DELETE, variables);
 };

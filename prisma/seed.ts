@@ -7,7 +7,7 @@ const tasks = Array.from(Array(15).keys());
 const handleMakeToDoItem = async (item: number) => {
   const res = await prisma.toDo.create({
     data: {
-      title: `ToDo ${15 - item}`,
+      title: `To Do ${15 - item}`,
       importance:
         item < 5
           ? Importance.LOW
@@ -20,7 +20,7 @@ const handleMakeToDoItem = async (item: number) => {
   await prisma.checkList.createMany({
     data: Array.from(Array(2).keys()).map((i) => {
       return {
-        title: `체크리스트 ${i + 1} (ToDo ${15 - item})`,
+        title: `Check List${i + 1} of To Do${15 - item}`,
         toDoId: res.id,
         isCompleted: item % 2 === 0,
       };

@@ -57,8 +57,8 @@ export const ToDoQuery = extendType({
               },
             },
           },
-          skip: skip ?? 0,
-          take: take ?? 10,
+          skip: skip ?? undefined,
+          take: take ?? undefined,
         });
       },
     });

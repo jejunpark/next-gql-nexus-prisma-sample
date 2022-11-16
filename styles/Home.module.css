@@ -3,5 +3,10 @@
   min-height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+
+  @media (max-width: 768px) {
+    align-items: start;
+    background: #ffffff;
+  }
 }
