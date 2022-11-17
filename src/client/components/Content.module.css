@@ -1,7 +1,6 @@
 .content {
   width: 500px;
   padding: 10px;
-  min-height: 700px;
   background: #ffffff;
 
   @media (max-width: 768px) {
@@ -11,19 +10,47 @@
   }
 
   .header {
-    .title {
-      font-size: 28px;
-      margin: 0 0 0 0;
-    }
+    .main-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-    .summary {
-      margin: 3px 0 0 0;
-      font-size: 18px;
-      color: #808080;
+      .title-area {
+        .title {
+          font-size: 28px;
+          margin: 0 0 0 0;
+        }
 
-      &.loading {
-        span {
-          animation: text-loading-effect 0.8s infinite alternate;
+        .summary {
+          margin: 3px 0 0 0;
+          font-size: 18px;
+          color: #808080;
+
+          &.loading {
+            span {
+              animation: text-loading-effect 0.8s infinite alternate;
+            }
+          }
+        }
+      }
+
+      .add-to-do-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.1);
+        .icon {
+          width: 20px;
+          height: 20px;
+        }
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.2);
         }
       }
     }
@@ -85,11 +112,18 @@
     }
   }
 
-  .to-do-item-list {
+  .main-content {
     display: flex;
+    width: 100%;
     flex-direction: column;
-    row-gap: 20px;
-    margin: 15px 0 0 0;
+    justify-content: space-between;
+
+    .to-do-item-list {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      margin: 15px 0 0 0;
+    }
   }
 }
 

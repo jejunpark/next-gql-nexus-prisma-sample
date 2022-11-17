@@ -20,3 +20,11 @@ export const ToDoCount = objectType({
     t.int("done");
   },
 });
+
+export const ToDoItems = objectType({
+  name: "ToDoItems",
+  definition(t) {
+    t.list.field("items", { type: "ToDo" });
+    t.int("_count");
+  },
+});

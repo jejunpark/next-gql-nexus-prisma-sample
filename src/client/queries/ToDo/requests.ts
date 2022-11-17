@@ -14,7 +14,7 @@ import {
 export const toDoItemsQuery = async (
   variables: NexusGenArgTypes["Query"]["ToDoItemsQuery"]
 ): Promise<{
-  ToDoItemsQuery: NexusGenObjects["ToDo"][];
+  ToDoItemsQuery: NexusGenObjects["ToDoItems"];
 }> => {
   return await graphQLClient.request(TO_DO_ITEMS_QUERY, variables);
 };

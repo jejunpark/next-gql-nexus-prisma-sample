@@ -1,7 +1,7 @@
 import { NexusGenObjects } from "@root/src/shared/generated/nexus-typegen";
 import { useMutation } from "react-query";
 import { BsCheck } from "react-icons/bs";
-import { AiOutlineClose } from "react-icons/ai";
+import { IoMdClose, IoIosAdd } from "react-icons/io";
 import { useState } from "react";
 import styles from "./ToDoItem.module.css";
 import classNames from "classnames/bind";
@@ -146,7 +146,7 @@ export default function ToDoItem(props: Props) {
                   deleteCheckList({ id: checklist.id });
                 }}
               >
-                x
+                <IoMdClose />
               </button>
             </div>
           );
@@ -157,6 +157,7 @@ export default function ToDoItem(props: Props) {
             value={form.title}
             onChange={handleChange}
             name="title"
+            placeholder="add check list"
           />
           <button
             className={cx("add-btn")}
@@ -165,7 +166,7 @@ export default function ToDoItem(props: Props) {
             }}
             disabled={!form.title}
           >
-            +
+            <IoIosAdd />
           </button>
         </div>
       </div>

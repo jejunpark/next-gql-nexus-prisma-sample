@@ -37,13 +37,16 @@ export const TO_DO_ITEMS_QUERY = gql`
       skip: $skip
       take: $take
     ) {
-      ${COMMON_TO_DO_FRAGMENT}
-      checkLists {
-        id
-        createdAt
-        updatedAt
-        title
-        isCompleted
+      _count
+      items {
+        ${COMMON_TO_DO_FRAGMENT}
+        checkLists {
+          id
+          createdAt
+          updatedAt
+          title
+          isCompleted
+        }
       }
     }
   }

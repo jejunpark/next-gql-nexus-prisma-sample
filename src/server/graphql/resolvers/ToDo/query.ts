@@ -33,8 +33,8 @@ export const ToDoQuery = extendType({
       },
     });
 
-    t.list.field("ToDoItemsQuery", {
-      type: "ToDo",
+    t.field("ToDoItemsQuery", {
+      type: "ToDoItems",
       args: {
         isDone: nullable(booleanArg()),
         importance: nullable(arg({ type: "Importance" })),
@@ -42,7 +42,7 @@ export const ToDoQuery = extendType({
         take: nullable(intArg()),
       },
       resolve: async (_, { isDone, importance, skip, take }, ctx) => {
-        return prisma.toDo.findMany({
+        const res = await prisma.toDo.findMany({
           where: {
             isDone: isDone ?? undefined,
             importance: importance ?? undefined,
@@ -60,6 +60,17 @@ export const ToDoQuery = extendType({
           skip: skip ?? undefined,
           take: take ?? undefined,
         });
+        const count = await prisma.toDo.count({
+          where: {
+            isDone: isDone ?? undefined,
+            importance: importance ?? undefined,
+          },
+        });
+
+        return {
+          items: res,
+          _count: count,
+        };
       },
     });
 
