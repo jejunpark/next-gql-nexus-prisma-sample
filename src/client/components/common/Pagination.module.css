@@ -1,0 +1,21 @@
+.page-nation {
+  .page-nation-list {
+    display: flex;
+    column-gap: 11px;
+    justify-content: center;
+
+    .page-nation-item {
+      width: 28px;
+      height: 28px;
+      border-radius: 2px;
+      font-size: 11px;
+      line-height: 16px;
+      font-weight: 500;
+
+      &.active {
+        color: #ffffff;
+        background: rgba(0, 0, 0, 1);
+      }
+    }
+  }
+}
